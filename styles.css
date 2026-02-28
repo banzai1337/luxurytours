@@ -2864,8 +2864,9 @@ textarea::placeholder {
     flex-wrap: nowrap;
   }
 
-  .header-actions > .btn {
-    display: none;
+  .site-header .header-actions > .btn,
+  .site-header .header-actions .btn-primary {
+    display: none !important;
   }
 
   .main-nav {
