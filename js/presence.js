@@ -6,8 +6,49 @@ const PRESENCE_STALE_MS = 45000;
 const PRESENCE_HISTORY_LIMIT = 300;
 const PRESENCE_GEO_CACHE_KEY = "agencyPresenceGeoCache";
 const PRESENCE_GEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const PRESENCE_API_PING_PATH = "/api/presence/ping";
+const PRESENCE_API_LEAVE_PATH = "/api/presence/leave";
 
 (function initPresenceTracker() {
+  let serverPresenceAvailable = null;
+
+  function getPresenceApiBase() {
+    if (typeof API_BASE_URL === "string") {
+      return API_BASE_URL;
+    }
+
+    return "";
+  }
+
+  async function sendPresenceToServer(path, payload) {
+    if (serverPresenceAvailable === false) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`${getPresenceApiBase()}${path}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        serverPresenceAvailable = true;
+        return;
+      }
+
+      if (response.status === 404 && serverPresenceAvailable === null) {
+        serverPresenceAvailable = false;
+      }
+    } catch (error) {
+      if (serverPresenceAvailable === null) {
+        serverPresenceAvailable = false;
+      }
+    }
+  }
+
   function buildFallbackVisitorIdentity() {
     const browserLocale = String(navigator.language || "").trim();
     const localeParts = browserLocale.split("-");
@@ -328,7 +369,7 @@ const PRESENCE_GEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
     const currentState = readPresenceState();
     const cleanedState = pruneStale(currentState);
 
-    cleanedState[tabId] = {
+    const nextPresence = {
       tabId,
       role: sessionInfo.role,
       username: sessionInfo.username,
@@ -343,7 +384,13 @@ const PRESENCE_GEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
       updatedAt: Date.now()
     };
 
+    cleanedState[tabId] = nextPresence;
+
     writePresenceState(cleanedState);
+    sendPresenceToServer(PRESENCE_API_PING_PATH, {
+      ...nextPresence,
+      historyId: `${tabId}-${startedAt}`
+    });
   }
 
   function removePresence() {
@@ -355,6 +402,7 @@ const PRESENCE_GEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
     const nextState = { ...currentState };
     delete nextState[tabId];
     writePresenceState(nextState);
+    sendPresenceToServer(PRESENCE_API_LEAVE_PATH, { tabId });
   }
 
   appendPresenceHistory();

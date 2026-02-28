@@ -29,11 +29,15 @@
   const key = typeof PRESENCE_STORAGE_KEY === "string" ? PRESENCE_STORAGE_KEY : "agencyPresenceState";
   const historyKey =
     typeof PRESENCE_HISTORY_STORAGE_KEY === "string" ? PRESENCE_HISTORY_STORAGE_KEY : "agencyPresenceHistory";
+  const apiBase = typeof API_BASE_URL === "string" ? API_BASE_URL : "";
   let currentSearchQuery = "";
   let showIp = localStorage.getItem(showIpStorageKey) === "1";
+  let serverPresenceAvailable = null;
+  let currentOnlineEntries = [];
+  let currentHistoryEntries = [];
   presenceShowIp.checked = showIp;
 
-  function readPresenceEntries() {
+  function readLocalPresenceEntries() {
     const raw = localStorage.getItem(key);
     if (!raw) {
       return [];
@@ -51,7 +55,7 @@
     }
   }
 
-  function readPresenceHistory() {
+  function readLocalPresenceHistory() {
     const raw = localStorage.getItem(historyKey);
     if (!raw) {
       return [];
@@ -63,6 +67,50 @@
     } catch (error) {
       return [];
     }
+  }
+
+  async function readPresenceFromServer() {
+    if (serverPresenceAvailable === false) {
+      return null;
+    }
+
+    try {
+      const response = await fetch(`${apiBase}/api/presence`, {
+        cache: "no-store"
+      });
+
+      if (!response.ok) {
+        if (response.status === 404 && serverPresenceAvailable === null) {
+          serverPresenceAvailable = false;
+        }
+        return null;
+      }
+
+      const payload = await response.json();
+      serverPresenceAvailable = true;
+
+      return {
+        online: Array.isArray(payload?.online) ? payload.online : [],
+        history: Array.isArray(payload?.history) ? payload.history : []
+      };
+    } catch (error) {
+      if (serverPresenceAvailable === null) {
+        serverPresenceAvailable = false;
+      }
+      return null;
+    }
+  }
+
+  async function refreshPresenceSource() {
+    const serverData = await readPresenceFromServer();
+    if (serverData) {
+      currentOnlineEntries = serverData.online;
+      currentHistoryEntries = serverData.history;
+      return;
+    }
+
+    currentOnlineEntries = readLocalPresenceEntries();
+    currentHistoryEntries = readLocalPresenceHistory();
   }
 
   function formatTimeSince(timestamp) {
@@ -148,8 +196,8 @@
       return;
     }
 
-    const historyItems = readPresenceHistory();
-    const presenceItems = readPresenceEntries();
+    const historyItems = currentHistoryEntries;
+    const presenceItems = currentOnlineEntries;
     const combined = [...presenceItems, ...historyItems];
     const matchedEntry = combined.find((item) => {
       const searchLogin = normalizeQuery(getSearchUsername(item.username, item.displayName));
@@ -181,7 +229,7 @@
 
   function renderOnlineUsers() {
     const now = Date.now();
-    const entries = readPresenceEntries()
+    const entries = currentOnlineEntries
       .filter((entry) => now - Number(entry.updatedAt || 0) <= staleMs)
       .sort((firstEntry, secondEntry) => Number(secondEntry.updatedAt || 0) - Number(firstEntry.updatedAt || 0));
 
@@ -220,7 +268,7 @@
   }
 
   function renderPresenceHistory() {
-    const historyItems = readPresenceHistory().slice(0, 200);
+    const historyItems = currentHistoryEntries.slice(0, 200);
     const groupedHistory = new Map();
     const query = normalizeQuery(currentSearchQuery);
 
@@ -295,9 +343,14 @@
       .join("");
   }
 
-  renderOnlineUsers();
-  renderPresenceHistory();
-  renderSearchInfo();
+  async function refreshAndRender() {
+    await refreshPresenceSource();
+    renderOnlineUsers();
+    renderPresenceHistory();
+    await renderSearchInfo();
+  }
+
+  void refreshAndRender();
 
   presenceLoginSearch.addEventListener("input", (event) => {
     const target = event.target;
@@ -307,7 +360,7 @@
 
     currentSearchQuery = target.value;
     renderPresenceHistory();
-    renderSearchInfo();
+    void renderSearchInfo();
   });
 
   presenceShowIp.addEventListener("change", (event) => {
@@ -320,19 +373,27 @@
     localStorage.setItem(showIpStorageKey, showIp ? "1" : "0");
     renderOnlineUsers();
     renderPresenceHistory();
-    renderSearchInfo();
+    void renderSearchInfo();
   });
 
-  window.setInterval(renderOnlineUsers, 5000);
-  window.setInterval(renderPresenceHistory, 7000);
+  window.setInterval(() => {
+    void refreshAndRender();
+  }, 5000);
+
   window.addEventListener("storage", (event) => {
+    if (serverPresenceAvailable === true) {
+      return;
+    }
+
     if (event.key === key) {
+      currentOnlineEntries = readLocalPresenceEntries();
       renderOnlineUsers();
-      renderSearchInfo();
+      void renderSearchInfo();
     }
     if (event.key === historyKey) {
+      currentHistoryEntries = readLocalPresenceHistory();
       renderPresenceHistory();
-      renderSearchInfo();
+      void renderSearchInfo();
     }
   });
 })();
