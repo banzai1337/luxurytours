@@ -2,7 +2,42 @@ const USER_SESSION_KEY = "agencyUserSession";
 const ADMIN_SESSION_KEY = "agencyAdminSession";
 const AUTH_TOKEN_KEY = "agencyAuthToken";
 const LOCAL_USERS_KEY = "agencyLocalUsers";
-const API_BASE_URL = "";
+const API_BASE_STORAGE_KEY = "agencyApiBaseUrl";
+
+function normalizeApiBaseUrl(value) {
+  const normalized = String(value || "").trim();
+  if (!normalized) {
+    return "";
+  }
+
+  return normalized.replace(/\/+$/, "");
+}
+
+function resolveApiBaseUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const queryApiBase = params.get("apiBase") || params.get("api") || "";
+  const normalizedQueryApiBase = normalizeApiBaseUrl(queryApiBase);
+
+  if (normalizedQueryApiBase) {
+    localStorage.setItem(API_BASE_STORAGE_KEY, normalizedQueryApiBase);
+  } else if (queryApiBase) {
+    localStorage.removeItem(API_BASE_STORAGE_KEY);
+  }
+
+  const runtimeApiBase = normalizeApiBaseUrl(window.LUXURY_API_BASE_URL);
+  if (runtimeApiBase) {
+    return runtimeApiBase;
+  }
+
+  const storedApiBase = normalizeApiBaseUrl(localStorage.getItem(API_BASE_STORAGE_KEY));
+  if (storedApiBase) {
+    return storedApiBase;
+  }
+
+  return "";
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
