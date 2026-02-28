@@ -83,9 +83,9 @@
     return;
   }
 
-  const headerInner = header.querySelector(".header-inner");
   const mainNav = header.querySelector(".main-nav");
-  if (!headerInner || !mainNav) {
+  const logo = header.querySelector(".logo");
+  if (!mainNav || !logo) {
     return;
   }
 
@@ -93,33 +93,23 @@
     mainNav.id = "siteMainNav";
   }
 
-  let toggleButton = header.querySelector(".mobile-menu-toggle");
-  if (!toggleButton) {
-    toggleButton = document.createElement("button");
-    toggleButton.type = "button";
-    toggleButton.className = "mobile-menu-toggle";
-    toggleButton.setAttribute("aria-label", "Открыть меню");
-    toggleButton.setAttribute("aria-expanded", "false");
-    toggleButton.setAttribute("aria-controls", mainNav.id);
-    toggleButton.innerHTML =
-      '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-
-    const logo = header.querySelector(".logo");
-    if (logo) {
-      headerInner.insertBefore(toggleButton, logo);
-    } else {
-      headerInner.prepend(toggleButton);
-    }
-  }
+  logo.classList.add("is-menu-trigger");
+  logo.setAttribute("aria-expanded", "false");
+  logo.setAttribute("aria-controls", mainNav.id);
 
   function closeMenu() {
     header.classList.remove("is-menu-open");
-    toggleButton.setAttribute("aria-expanded", "false");
+    logo.setAttribute("aria-expanded", "false");
   }
 
-  toggleButton.addEventListener("click", () => {
+  logo.addEventListener("click", (event) => {
+    if (!window.matchMedia("(max-width: 760px)").matches) {
+      return;
+    }
+
+    event.preventDefault();
     const isOpen = header.classList.toggle("is-menu-open");
-    toggleButton.setAttribute("aria-expanded", String(isOpen));
+    logo.setAttribute("aria-expanded", String(isOpen));
   });
 
   mainNav.querySelectorAll("a").forEach((link) => {
