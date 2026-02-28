@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c47d5c" />
+    <title>Блог и гайды — LuxuryTours</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/q78g2vmQ/image.png" />
+    <meta name="description" content="Практичные статьи и гайды для подготовки к путешествиям." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Перейти к основному контенту</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="На главную">
+          <span class="logo-mark"
+            ><img
+              class="logo-image"
+              src="https://i.postimg.cc/q78g2vmQ/image.png"
+              alt="Логотип LuxuryTours"
+          /></span>
+          <span class="logo-text">LuxuryTours</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="tours.html">Туры</a>
+          <a class="active" href="blog.html" aria-current="page">Блог</a>
+          <a href="profile.html">Профиль</a>
+          <a href="agreement.html">Договор</a>
+          <a href="index.html#contacts">Контакты</a>
+        </nav>
+
+        <div class="header-actions">
+          <span id="userAuthArea"></span>
+          <a class="btn btn-primary" href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer"
+            >Связаться</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main" id="mainContent">
+      <section class="section section-photo catalog-photo">
+        <div class="container">
+          <h1 class="section-title">Блог и гайды</h1>
+          <p class="section-subtitle">Реальные практические материалы: как выбрать тур, подготовить документы и не переплатить.</p>
+
+          <section class="blog-directions-wrap" aria-label="Подборка направлений">
+            <div class="section-head-row">
+              <h2 class="section-title">Подборка направлений</h2>
+              <div class="blog-directions-nav">
+                <button class="btn btn-secondary" type="button" id="directionPrevBtn" aria-label="Предыдущая подборка">←</button>
+                <button class="btn btn-secondary" type="button" id="directionNextBtn" aria-label="Следующая подборка">→</button>
+              </div>
+            </div>
+            <div class="blog-directions-slider" id="directionsSlider" aria-live="polite"></div>
+          </section>
+
+          <div class="blog-controls card">
+            <input id="blogSearch" type="text" placeholder="Поиск по статьям" />
+            <select id="blogCategory">
+              <option value="all">Все темы</option>
+              <option value="Бюджет">Бюджет</option>
+              <option value="Подготовка">Подготовка</option>
+              <option value="Безопасность">Безопасность</option>
+              <option value="Семейный отдых">Семейный отдых</option>
+              <option value="Маршруты">Маршруты</option>
+              <option value="Пляжные направления">Пляжные направления</option>
+              <option value="Горные маршруты">Горные маршруты</option>
+              <option value="Визы">Визы</option>
+              <option value="Перелеты">Перелеты</option>
+              <option value="Релакс">Релакс</option>
+              <option value="Романтические поездки">Романтические поездки</option>
+            </select>
+          </div>
+
+          <div class="blog-grid" id="blogList" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contacts">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand-row">
+            <span class="footer-brand-logo"
+              ><img
+                class="footer-brand-logo-image"
+                src="https://i.postimg.cc/q78g2vmQ/image.png"
+                alt="Логотип LuxuryTours"
+            /></span>
+            <h3>LuxuryTours</h3>
+          </div>
+          <p>
+            LuxuryTours — премиальный travel-сервис, где каждая деталь работает на ваш комфорт,
+            статус и безупречный уровень впечатлений.
+          </p>
+          <p>
+            Мы берём на себя всё: стратегию маршрута, отели высокого класса, персональные условия,
+            поддержку 24/7 и сопровождение до возвращения домой.
+          </p>
+          <p class="footer-brand-highlights">Индивидуальный подход • Экспертный подбор • Сервис уровня concierge</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+          <p>Адрес: ul. Marszałkowska 58</p>
+          <p>00-545 Warszawa</p>
+          <p>
+            Telegram:
+            <a href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer">@LuxuryToursPL</a>
+          </p>
+        </div>
+      </div>
+      <div class="container footer-copy">© 2022 LuxuryTours. Все права защищены.</div>
+    </footer>
+
+    <script src="js/consent-modal.js"></script>
+    <script src="js/auth-db.js"></script>
+    <script src="js/auth-ui.js"></script>
+    <script src="js/presence.js"></script>
+    <script src="js/blog-data.js"></script>
+    <script src="js/blog.js"></script>
+  </body>
+</html>

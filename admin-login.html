@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c47d5c" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/q78g2vmQ/image.png" />
+    <title>Вход администратора — LuxuryTours</title>
+    <meta name="description" content="Отдельный вход в админ-панель турагентства." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Перейти к основному контенту</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="На главную">
+          <span class="logo-mark"
+            ><img
+              class="logo-image"
+              src="https://i.postimg.cc/q78g2vmQ/image.png"
+              alt="Логотип LuxuryTours"
+          /></span>
+          <span class="logo-text">LuxuryTours</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="tours.html">Туры</a>
+          <a href="login.html">Пользователь</a>
+          <a class="active" href="admin-login.html" aria-current="page">Админ</a>
+          <a href="agreement.html">Договор</a>
+          <a href="index.html#contacts">Контакты</a>
+        </nav>
+
+        <a class="btn btn-primary" href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer"
+          >Связаться</a
+        >
+      </div>
+    </header>
+
+    <main class="page-main login-main" id="mainContent">
+      <section class="section">
+        <div class="container login-wrap">
+          <form class="card login-card" id="adminLoginForm" novalidate>
+            <h1 class="section-title">Вход администратора</h1>
+            <p class="section-subtitle">Доступ только для админ-панели.</p>
+
+            <label for="username">Логин</label>
+            <input id="username" name="username" type="text" required autocomplete="username" />
+
+            <label for="password">Пароль</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              autocomplete="current-password"
+            />
+
+            <button class="btn btn-accent" type="submit">Войти в админку</button>
+            <p class="form-hint" id="adminLoginHint" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/consent-modal.js"></script>
+    <script src="js/auth-db.js"></script>
+    <script src="js/presence.js"></script>
+    <script src="js/admin-login.js"></script>
+  </body>
+</html>

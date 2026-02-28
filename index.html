@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c47d5c" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/q78g2vmQ/image.png" />
+    <title>LuxuryTours — Турагентство</title>
+    <meta
+      name="description"
+      content="Турагентство LuxuryTours — подбор уютных и продуманных путешествий по миру."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#mainContent">Перейти к основному контенту</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="На главную">
+          <span class="logo-mark"
+            ><img
+              class="logo-image"
+              src="https://i.postimg.cc/q78g2vmQ/image.png"
+              alt="Логотип LuxuryTours"
+          /></span>
+          <span class="logo-text">LuxuryTours</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a class="active" href="index.html" aria-current="page">Главная</a>
+          <a href="tours.html">Туры</a>
+          <a href="blog.html">Блог</a>
+          <a href="profile.html">Профиль</a>
+          <a href="agreement.html">Договор</a>
+          <a href="#about">О нас</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+
+        <div class="header-actions">
+          <span id="userAuthArea"></span>
+          <a class="btn btn-primary" href="#contacts">Связаться</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <img
+          class="hero-image"
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80"
+          alt="Море и тёплый песчаный берег"
+        />
+        <div class="container hero-content">
+          <p class="eyebrow">Агентство путешествий с заботой о деталях</p>
+          <h1>Путешествия, в которых хочется остаться</h1>
+          <p>
+            Подбираем туры под ваш темп, бюджет и настроение — спокойно, понятно и
+            профессионально.
+          </p>
+          <a class="btn btn-accent" href="tours.html">Подобрать тур</a>
+        </div>
+      </section>
+
+      <section class="section section-muted">
+        <div class="container">
+          <div class="home-icon-preview card">
+            <h2 class="section-title">Иконка договора</h2>
+            <img
+              class="home-icon-preview-image"
+              src="agreement-icon.svg"
+              width="256"
+              height="256"
+              alt="Иконка: документ и весы правосудия"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-photo about-photo" id="about">
+        <div class="container">
+          <h2 class="section-title">Почему выбирают нас</h2>
+          <div class="adv-grid">
+            <article class="card adv-card">
+              <div class="icon" aria-hidden="true">✦</div>
+              <h3>Индивидуальный подбор</h3>
+              <p>Предлагаем направления, которые действительно подходят именно вам.</p>
+            </article>
+            <article class="card adv-card">
+              <div class="icon" aria-hidden="true">⌛</div>
+              <h3>Экономия времени</h3>
+              <p>Берём на себя поиск, сравнение и организацию поездки от начала до конца.</p>
+            </article>
+            <article class="card adv-card">
+              <div class="icon" aria-hidden="true">🛡</div>
+              <h3>Надёжные партнёры</h3>
+              <p>Работаем только с проверенными операторами и прозрачными условиями.</p>
+            </article>
+            <article class="card adv-card">
+              <div class="icon" aria-hidden="true">❤</div>
+              <h3>Поддержка 24/7</h3>
+              <p>Остаёмся на связи на каждом этапе вашего путешествия.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-muted">
+        <div class="container">
+          <div class="section-head-row">
+            <h2 class="section-title">Популярные туры</h2>
+            <a class="text-link" href="tours.html">Смотреть все туры</a>
+          </div>
+          <div class="tours-grid" id="homePopularToursGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section section-muted">
+        <div class="container">
+          <div class="section-head-row">
+            <h2 class="section-title">Новые туры</h2>
+            <a class="text-link" href="tours.html">Смотреть все туры</a>
+          </div>
+          <div class="tours-grid" id="homeToursGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section section-photo reviews-photo">
+        <div class="container">
+          <div class="section-head-row">
+            <h2 class="section-title">Отзывы клиентов</h2>
+          </div>
+
+          <div class="reviews-carousel" id="reviewsCarousel" aria-live="polite">
+            <div class="reviews-track" id="reviewsTrack"></div>
+            <div class="reviews-dots" id="reviewsDots"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-muted">
+        <div class="container">
+          <div class="section-head-row">
+            <h2 class="section-title">Подборки направлений</h2>
+            <a class="text-link" href="tours.html">Открыть каталог</a>
+          </div>
+          <div class="home-collections-grid">
+            <article class="card home-collection-card">
+              <h3>Семейные туры</h3>
+              <p>Комфортные отели, короткие переезды и маршруты, удобные для детей.</p>
+            </article>
+            <article class="card home-collection-card">
+              <h3>Пляжные каникулы</h3>
+              <p>Тёплое море, отдых у воды и проверенные резорты с лучшими рейтингами.</p>
+            </article>
+            <article class="card home-collection-card">
+              <h3>Горные маршруты</h3>
+              <p>Треккинг, панорамы, свежий воздух и активный отдых в умеренном темпе.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-muted">
+        <div class="container">
+          <h2 class="section-title">FAQ</h2>
+          <div class="home-faq-list">
+            <details class="card home-faq-item">
+              <summary>Какие документы нужны для бронирования?</summary>
+              <p>
+                Для первичного бронирования обычно нужны: загранпаспорт (или данные паспорта), контактный телефон,
+                email и данные всех участников поездки. После подтверждения заявки менеджер отправляет персональный
+                чек-лист по направлению: визовые документы, требования по сроку действия паспорта, страхованию и
+                медицинским формам, если они обязательны. Мы проверяем комплект до оплаты, чтобы минимизировать
+                риски отказа и задержек.
+              </p>
+            </details>
+            <details class="card home-faq-item">
+              <summary>Можно ли изменить даты поездки?</summary>
+              <p>
+                Да, изменение дат возможно, если у туроператора или отеля есть свободные места на нужные периоды.
+                Стоимость может измениться в зависимости от сезона, тарифа перелёта и условий проживания. Мы заранее
+                просчитываем 2–3 альтернативы по цене и формату, согласовываем с вами лучшее решение и только после
+                этого подтверждаем корректировку брони. Если перенос невозможен, подскажем вариант с минимальными
+                штрафами или альтернативный маршрут.
+              </p>
+            </details>
+            <details class="card home-faq-item">
+              <summary>Как быстро приходит подтверждение?</summary>
+              <p>
+                Первичная обратная связь обычно приходит в течение 15–60 минут в рабочее время. Полное подтверждение
+                зависит от направления и партнёров: по массовым турам — как правило, в день обращения, по сложным
+                маршрутам или нестандартным датам — до 24 часов. На каждом этапе мы держим вас в курсе: отправляем
+                статус заявки, финальную цену, условия оплаты и документы в удобном формате (WhatsApp/Telegram/email).
+              </p>
+            </details>
+            <details class="card home-faq-item">
+              <summary>Какие способы оплаты доступны и безопасно ли это?</summary>
+              <p>
+                Мы используем официальные способы оплаты через партнёрские платёжные каналы и подтверждающие документы.
+                Перед оплатой вы получаете детализацию: что входит в тур, итоговую стоимость, условия возврата и сроки
+                подтверждения. После оплаты отправляем чек и пакет документов. По запросу разбиваем оплату на этапы,
+                если это допускают условия конкретного тарифа.
+              </p>
+            </details>
+            <details class="card home-faq-item">
+              <summary>Что делать, если рейс перенесли или отменили?</summary>
+              <p>
+                В случае изменений рейса мы оперативно связываемся с вами и предлагаем доступные варианты:
+                переоформление, перенос дат, альтернативный маршрут или возврат по правилам тарифа. Менеджер помогает
+                с коммуникацией с перевозчиком и туроператором, чтобы вы не решали вопрос в одиночку. Мы остаёмся на
+                связи до полного урегулирования ситуации.
+              </p>
+            </details>
+            <details class="card home-faq-item">
+              <summary>Подходит ли сервис для поездок с детьми?</summary>
+              <p>
+                Да, мы подбираем семейные варианты с учётом возраста детей, длительности перелёта, питания,
+                инфраструктуры отеля и медицинской доступности рядом. Помогаем выбрать удобный ритм поездки, даём
+                рекомендации по перелёту и списку вещей в ручную кладь, а также подсказываем, какие документы и
+                согласия могут понадобиться для выезда ребёнка.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-muted">
+        <div class="container">
+          <h2 class="section-title">Блог и гайды</h2>
+          <div class="home-blog-slider" aria-live="polite">
+            <button class="btn btn-secondary home-blog-side-btn home-blog-side-btn-left" type="button" id="homeBlogPrevBtn" aria-label="Предыдущие статьи">←</button>
+            <div class="home-blog-viewport" id="homeBlogSlider">
+              <div class="home-blog-track" id="homeBlogTrack"></div>
+            </div>
+            <button class="btn btn-secondary home-blog-side-btn home-blog-side-btn-right" type="button" id="homeBlogNextBtn" aria-label="Следующие статьи">→</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contacts">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand-row">
+            <span class="footer-brand-logo"
+              ><img
+                class="footer-brand-logo-image"
+                src="https://i.postimg.cc/q78g2vmQ/image.png"
+                alt="Логотип LuxuryTours"
+            /></span>
+            <h3>LuxuryTours</h3>
+          </div>
+          <p>
+            LuxuryTours — премиальный travel-сервис, где каждая деталь работает на ваш комфорт,
+            статус и безупречный уровень впечатлений.
+          </p>
+          <p>
+            Мы берём на себя всё: стратегию маршрута, отели высокого класса, персональные условия,
+            поддержку 24/7 и сопровождение до возвращения домой.
+          </p>
+          <p class="footer-brand-highlights">Индивидуальный подход • Экспертный подбор • Сервис уровня concierge</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>
+            whatsapp:
+            <a href="https://wa.me/79991234567" target="_blank" rel="noopener noreferrer"
+              >+7 (999) 123-45-67</a>
+          </p>
+          <p>Адрес: ul. Marszałkowska 58</p>
+          <p>00-545 Warszawa</p>
+          <p>
+            Telegram:
+            <a href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer"
+              >@LuxuryToursPL</a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="container footer-copy">© 2022 LuxuryTours. Все права защищены.</div>
+    </footer>
+
+    <script src="js/consent-modal.js"></script>
+    <script src="js/auth-db.js"></script>
+    <script src="js/auth-ui.js"></script>
+    <script src="js/tours-data.js"></script>
+    <script src="js/presence.js"></script>
+    <script src="js/blog-data.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/reviews-data.js"></script>
+    <script src="js/reviews.js"></script>
+  </body>
+</html>

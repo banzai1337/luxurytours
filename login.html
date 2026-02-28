@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c47d5c" />
+    <title>Авторизация — LuxuryTours</title>
+    <meta name="description" content="Вход и регистрация пользователя на сайте турагентства." />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/q78g2vmQ/image.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Перейти к основному контенту</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="На главную">
+          <span class="logo-mark"
+            ><img
+              class="logo-image"
+              src="https://i.postimg.cc/q78g2vmQ/image.png"
+              alt="Логотип LuxuryTours"
+          /></span>
+          <span class="logo-text">LuxuryTours</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="tours.html">Туры</a>
+          <a class="active" href="login.html" aria-current="page">Авторизация</a>
+          <a href="agreement.html">Договор</a>
+          <a href="index.html#contacts">Контакты</a>
+        </nav>
+
+        <a class="btn btn-primary" href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer"
+          >Связаться</a
+        >
+      </div>
+    </header>
+
+    <main class="page-main login-main" id="mainContent">
+      <section class="section">
+        <div class="container login-wrap">
+          <article class="auth-shell card">
+            <div class="auth-side" aria-hidden="true">
+              <div class="auth-side-content">
+                <h2 id="authSideTitle">Начните своё путешествие уже сегодня</h2>
+                <p id="authSideText">Зарегистрируйтесь сейчас и получите быстрый доступ к лучшим турам и персональным предложениям.</p>
+                <button class="auth-side-btn" type="button" id="showLogin">У меня уже есть аккаунт</button>
+              </div>
+            </div>
+
+            <div class="login-card auth-main">
+              <div class="auth-social" aria-label="Социальные сети">
+                <button type="button" aria-label="Facebook">f</button>
+                <button type="button" aria-label="Google">G+</button>
+                <button type="button" aria-label="LinkedIn">in</button>
+              </div>
+
+              <p class="auth-social-note">или используйте email</p>
+
+              <form id="loginForm" class="auth-form" novalidate>
+                <h1 class="section-title">Вход в аккаунт</h1>
+                <p class="section-subtitle">Войдите, чтобы сохранять доступ к своему аккаунту.</p>
+
+                <label for="loginUsername">Логин или email</label>
+                <input id="loginUsername" name="username" type="text" required autocomplete="username" />
+
+                <label for="loginPassword">Пароль</label>
+                <input
+                  id="loginPassword"
+                  name="password"
+                  type="password"
+                  required
+                  autocomplete="current-password"
+                />
+
+                <button class="btn btn-accent" type="submit">Войти</button>
+                <p class="form-hint" id="loginHint" aria-live="polite"></p>
+              </form>
+
+              <form id="registerForm" class="auth-form auth-hidden" novalidate>
+                <h1 class="section-title">Создайте аккаунт</h1>
+                <p class="section-subtitle">Присоединяйтесь и бронируйте туры быстрее с персональными подборками.</p>
+
+                <label for="registerUsername">Логин</label>
+                <input id="registerUsername" name="username" type="text" required autocomplete="username" />
+
+                <label for="registerPassword">Пароль</label>
+                <input
+                  id="registerPassword"
+                  name="password"
+                  type="password"
+                  required
+                  autocomplete="new-password"
+                />
+
+                <label for="registerEmail">Email</label>
+                <input id="registerEmail" name="email" type="email" required autocomplete="email" />
+
+                <label for="confirmPassword">Повторите пароль</label>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  required
+                  autocomplete="new-password"
+                />
+
+                <button class="btn btn-accent" type="submit">Зарегистрироваться</button>
+                <p class="form-hint" id="registerHint" aria-live="polite"></p>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/consent-modal.js"></script>
+    <script src="js/auth-db.js"></script>
+    <script src="js/presence.js"></script>
+    <script src="js/auth-page.js"></script>
+  </body>
+</html>

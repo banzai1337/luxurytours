@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c47d5c" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/q78g2vmQ/image.png" />
+    <title>Профиль — LuxuryTours</title>
+    <meta name="description" content="Личный профиль пользователя сайта LuxuryTours." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Перейти к основному контенту</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="На главную">
+          <span class="logo-mark"
+            ><img
+              class="logo-image"
+              src="https://i.postimg.cc/q78g2vmQ/image.png"
+              alt="Логотип LuxuryTours"
+          /></span>
+          <span class="logo-text">LuxuryTours</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="tours.html">Туры</a>
+          <a class="active" href="profile.html" aria-current="page">Профиль</a>
+          <a href="agreement.html">Договор</a>
+          <a href="index.html#contacts">Контакты</a>
+        </nav>
+
+        <div class="header-actions">
+          <span id="userAuthArea"></span>
+          <a class="btn btn-primary" href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer"
+            >Связаться</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main profile-main" id="mainContent">
+      <section class="section">
+        <div class="container profile-wrap">
+          <article class="card profile-card" id="profileCard">
+            <h1 class="section-title">Ваш профиль</h1>
+            <p class="section-subtitle" id="profileInfo"></p>
+
+            <section class="profile-info-grid" aria-label="Данные аккаунта">
+              <article class="profile-info-item">
+                <h3>Логин</h3>
+                <p id="profileLogin">—</p>
+              </article>
+
+              <article class="profile-info-item">
+                <h3>Почта</h3>
+                <p id="profileEmail">—</p>
+              </article>
+
+              <article class="profile-info-item">
+                <h3>Пароль</h3>
+                <div class="profile-password-row">
+                  <input id="profilePassword" type="password" value="" readonly />
+                  <button class="password-toggle" type="button" id="togglePasswordBtn" aria-label="Показать пароль">
+                    👁
+                  </button>
+                </div>
+              </article>
+            </section>
+
+            <div class="profile-actions">
+              <a class="profile-tour-cta" href="tours.html" aria-label="Перейти к турам">
+                <span class="profile-tour-cta-text">
+                  <strong>Перейти к турам</strong>
+                  <span>Откройте каталог и выберите идеальное путешествие</span>
+                </span>
+                <span class="profile-tour-cta-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <section class="profile-favorites-wrap" aria-labelledby="favoritesTitle">
+              <h2 id="favoritesTitle">Избранные туры</h2>
+              <div class="tours-grid" id="profileFavoritesGrid" aria-live="polite"></div>
+            </section>
+
+            <section class="profile-favorites-wrap" aria-labelledby="viewedTitle">
+              <h2 id="viewedTitle">История просмотров</h2>
+              <div class="tours-grid" id="profileViewedGrid" aria-live="polite"></div>
+            </section>
+
+            <section class="profile-favorites-wrap" aria-labelledby="bookingsTitle">
+              <h2 id="bookingsTitle">История заявок</h2>
+              <div class="profile-bookings-list" id="profileBookingsList" aria-live="polite"></div>
+            </section>
+
+            <section class="profile-favorites-wrap" aria-labelledby="recommendedTitle">
+              <h2 id="recommendedTitle">Персональные рекомендации</h2>
+              <div class="tours-grid" id="profileRecommendedGrid" aria-live="polite"></div>
+            </section>
+
+            <div class="profile-logout-wrap">
+              <button class="profile-logout-bar" type="button" id="profileLogoutBtn">Выйти из аккаунта</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/consent-modal.js"></script>
+    <script src="js/auth-db.js"></script>
+    <script src="js/auth-ui.js"></script>
+    <script src="js/tours-data.js"></script>
+    <script src="js/presence.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c47d5c" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/q78g2vmQ/image.png" />
+    <title>Туры — LuxuryTours</title>
+    <meta name="description" content="Каталог туров турагентства LuxuryTours." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Перейти к основному контенту</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="На главную">
+          <span class="logo-mark"
+            ><img
+              class="logo-image"
+              src="https://i.postimg.cc/q78g2vmQ/image.png"
+              alt="Логотип LuxuryTours"
+          /></span>
+          <span class="logo-text">LuxuryTours</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a class="active" href="tours.html" aria-current="page">Туры</a>
+          <a href="profile.html">Профиль</a>
+          <a href="agreement.html">Договор</a>
+          <a href="index.html#about">О нас</a>
+          <a href="index.html#contacts">Контакты</a>
+        </nav>
+
+        <div class="header-actions">
+          <span id="userAuthArea"></span>
+          <a class="btn btn-primary" href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer"
+            >Связаться</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main" id="mainContent">
+      <section class="section section-photo catalog-photo">
+        <div class="container">
+          <h1 class="section-title">Туры</h1>
+          <p class="section-subtitle">
+            Здесь размещены превью туров. Нажмите на карточку, чтобы открыть подробную страницу.
+          </p>
+          <div class="catalog-controls card" aria-label="Фильтры каталога">
+            <input id="catalogSearch" type="text" placeholder="Поиск по названию или описанию" />
+            <select id="catalogCategory">
+              <option value="all">Все категории</option>
+            </select>
+            <select id="catalogBudget">
+              <option value="all">Любой бюджет</option>
+              <option value="70000">До 70 000 €</option>
+              <option value="90000">До 90 000 €</option>
+              <option value="120000">До 120 000 €</option>
+            </select>
+            <select id="catalogSeason">
+              <option value="all">Любой сезон</option>
+              <option value="winter">Зима</option>
+              <option value="spring">Весна</option>
+              <option value="summer">Лето</option>
+              <option value="autumn">Осень</option>
+            </select>
+            <select id="catalogSort">
+              <option value="popular">Сначала популярные</option>
+              <option value="new">Сначала новые</option>
+              <option value="price-asc">Цена по возрастанию</option>
+              <option value="price-desc">Цена по убыванию</option>
+            </select>
+          </div>
+
+          <section class="card ai-concierge" aria-label="AI-консьерж">
+            <h2>AI-консьерж</h2>
+            <p>Опишите поездку своими словами: бюджет, формат отдыха, состав семьи, сезон.</p>
+            <div class="ai-concierge-controls">
+              <input id="aiTourPrompt" type="text" placeholder="Например: спокойный пляжный тур для семьи с ребенком до 90000" />
+              <button class="btn btn-accent" type="button" id="aiSuggestToursBtn">Подобрать туры</button>
+            </div>
+            <p class="form-hint" id="aiTourHint" aria-live="polite"></p>
+          </section>
+
+          <div class="card catalog-compare" id="catalogCompare" aria-live="polite"></div>
+          <div class="tours-grid" id="toursGrid" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contacts">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand-row">
+            <span class="footer-brand-logo"
+              ><img
+                class="footer-brand-logo-image"
+                src="https://i.postimg.cc/q78g2vmQ/image.png"
+                alt="Логотип LuxuryTours"
+            /></span>
+            <h3>LuxuryTours</h3>
+          </div>
+          <p>
+            LuxuryTours — премиальный travel-сервис, где каждая деталь работает на ваш комфорт,
+            статус и безупречный уровень впечатлений.
+          </p>
+          <p>
+            Мы берём на себя всё: стратегию маршрута, отели высокого класса, персональные условия,
+            поддержку 24/7 и сопровождение до возвращения домой.
+          </p>
+          <p class="footer-brand-highlights">Индивидуальный подход • Экспертный подбор • Сервис уровня concierge</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+          <p>Адрес: ul. Marszałkowska 58</p>
+          <p>00-545 Warszawa</p>
+          <p>
+            Telegram:
+            <a href="https://t.me/USERNAME" target="_blank" rel="noopener noreferrer"
+              >@USERNAME</a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="container footer-copy">© 2022 LuxuryTours. Все права защищены.</div>
+    </footer>
+
+    <script src="js/consent-modal.js"></script>
+    <script src="js/auth-db.js"></script>
+    <script src="js/auth-ui.js"></script>
+    <script src="js/tours-data.js"></script>
+    <script src="js/presence.js"></script>
+    <script src="js/tours.js"></script>
+  </body>
+</html>

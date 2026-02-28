@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c47d5c" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/q78g2vmQ/image.png" />
+    <title>Админ-панель — LuxuryTours</title>
+    <meta name="description" content="Админ-панель для управления турами." />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Перейти к основному контенту</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" aria-label="На главную">
+          <span class="logo-mark"
+            ><img
+              class="logo-image"
+              src="https://i.postimg.cc/q78g2vmQ/image.png"
+              alt="Логотип LuxuryTours"
+          /></span>
+          <span class="logo-text">LuxuryTours</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="tours.html">Туры</a>
+          <a class="active" href="admin.html" aria-current="page">Админ</a>
+          <a href="agreement.html">Договор</a>
+          <a href="index.html#contacts">Контакты</a>
+        </nav>
+
+        <a class="btn btn-primary" href="https://t.me/LuxuryToursPL" target="_blank" rel="noopener noreferrer"
+          >Связаться</a
+        >
+      </div>
+    </header>
+
+    <main class="page-main" id="mainContent">
+      <section class="section">
+        <div class="container">
+          <h1 class="section-title">Админ-панель туров</h1>
+          <p class="section-subtitle">
+            Добавляйте, редактируйте и удаляйте туры без перезагрузки страницы.
+          </p>
+
+          <div class="admin-top-switch" role="tablist" aria-label="Режимы админки">
+            <button class="btn btn-secondary admin-mode-btn is-active" type="button" id="showTourMode" role="tab">
+              Добавить тур
+            </button>
+            <button class="btn btn-secondary admin-mode-btn" type="button" id="showReviewMode" role="tab">
+              Добавить отзыв
+            </button>
+            <button class="btn btn-secondary admin-mode-btn" type="button" id="showPresenceMode" role="tab">
+              Кто на сайте
+            </button>
+          </div>
+
+          <div class="card admin-review-form-wrap admin-panel is-hidden" id="reviewPanel">
+            <h2>Написать отзыв</h2>
+            <form id="reviewForm" novalidate>
+              <div class="admin-review-fields">
+                <div>
+                  <label for="reviewName">Имя</label>
+                  <input id="reviewName" name="reviewName" type="text" required />
+                </div>
+                <div>
+                  <label for="reviewStars">Звезды</label>
+                  <select id="reviewStars" name="reviewStars">
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                  </select>
+                </div>
+              </div>
+
+              <label for="reviewText">Отзыв</label>
+              <textarea id="reviewText" name="reviewText" rows="3" required></textarea>
+
+              <div class="form-actions">
+                <button class="btn btn-accent" type="submit">Добавить отзыв</button>
+              </div>
+              <p class="form-hint" id="reviewHint" aria-live="polite"></p>
+            </form>
+
+            <div class="admin-reviews-list" id="reviewsAdminList" aria-live="polite"></div>
+          </div>
+
+          <div class="admin-layout admin-panel" id="tourPanel">
+            <form class="card admin-form" id="tourForm" novalidate>
+              <h2>Форма тура</h2>
+              <input type="hidden" id="tourId" />
+
+              <label for="title">Название тура</label>
+              <input id="title" name="title" type="text" required />
+
+              <label for="description">Описание</label>
+              <textarea id="description" name="description" rows="4" required></textarea>
+
+              <label for="price">Цена (€)</label>
+              <input id="price" name="price" type="number" min="1" required />
+
+              <label for="duration">Длительность</label>
+              <input id="duration" name="duration" type="text" placeholder="например, 7 + 2" required />
+
+              <label>Направления</label>
+              <div class="admin-category-picker" id="adminCategoryPicker">
+                <div class="admin-category-actions">
+                  <button class="btn btn-secondary admin-category-trigger" type="button" id="categoryTriggerBtn">
+                    Выбрать направления
+                  </button>
+                  <button class="btn btn-secondary" type="button" id="aiSuggestCategoriesBtn">
+                    ИИ-подбор
+                  </button>
+                </div>
+                <div class="admin-category-dropdown is-hidden" id="categoryDropdown" aria-live="polite"></div>
+              </div>
+
+              <label for="image">Ссылка на обложку</label>
+              <input id="image" name="image" type="url" placeholder="https://... (опционально, если загружаете фото)" />
+
+              <label for="imagesUpload">Загрузить фото тура</label>
+              <div class="admin-file-upload">
+                <input id="imagesUpload" class="admin-file-input" name="imagesUpload" type="file" accept="image/*" multiple />
+                <label for="imagesUpload" class="btn btn-secondary admin-file-upload-btn">📷 Загрузить фото</label>
+                <span class="admin-file-upload-info" id="imagesUploadInfo">Файлы не выбраны</span>
+              </div>
+
+              <label for="galleryUrls">Дополнительные ссылки на фото (по одной в строке)</label>
+              <textarea id="galleryUrls" name="galleryUrls" rows="3" placeholder="https://...&#10;https://..."></textarea>
+              <div class="admin-images-preview-wrap">
+                <p class="form-hint">Перетаскивайте фото, чтобы изменить порядок. Первое фото станет обложкой.</p>
+                <div class="admin-images-preview" id="adminImagesPreview" aria-live="polite"></div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-accent" type="submit" id="submitBtn">Добавить тур</button>
+                <button class="btn btn-secondary" type="button" id="cancelEditBtn">Отменить</button>
+              </div>
+              <p class="form-hint" id="formHint" aria-live="polite"></p>
+            </form>
+
+            <div class="card admin-list-wrap">
+              <h2>Список туров</h2>
+              <div class="admin-list" id="adminList" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="card admin-panel admin-analytics-wrap" id="analyticsPanel">
+            <h2>Аналитика и сегменты</h2>
+            <div class="admin-analytics-grid" id="adminAnalyticsGrid" aria-live="polite"></div>
+            <div class="admin-segments-list" id="adminSegmentsList" aria-live="polite"></div>
+            <div class="admin-bookings-pipeline" id="adminBookingsPipeline" aria-live="polite"></div>
+          </div>
+
+          <div class="card admin-panel is-hidden admin-presence-wrap" id="presencePanel">
+            <h2>Кто на сайте и что смотрят</h2>
+            <div class="admin-presence-search">
+              <label for="presenceLoginSearch">Поиск по логину</label>
+              <input id="presenceLoginSearch" type="text" placeholder="Введите логин" />
+              <label class="admin-presence-ip-toggle" for="presenceShowIp">
+                <input id="presenceShowIp" type="checkbox" />
+                <span class="admin-presence-ip-toggle-ui" aria-hidden="true"></span>
+                <span class="admin-presence-ip-toggle-text">Показывать IP</span>
+              </label>
+              <p class="form-hint" id="presenceSearchInfo" aria-live="polite"></p>
+            </div>
+            <p class="form-hint" id="onlineUsersHint" aria-live="polite"></p>
+            <div class="admin-online-list" id="onlineUsersList" aria-live="polite"></div>
+
+            <h3 class="admin-presence-history-title">История входов</h3>
+            <p class="form-hint" id="presenceHistoryHint" aria-live="polite"></p>
+            <div class="admin-online-list" id="presenceHistoryList" aria-live="polite"></div>
+          </div>
+
+          <div class="admin-logout-wrap">
+            <button class="btn btn-secondary" type="button" id="logoutBtn">Выйти из админки</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/consent-modal.js"></script>
+    <script src="js/auth-db.js"></script>
+    <script src="js/presence.js"></script>
+    <script src="js/admin-auth.js"></script>
+    <script src="js/tours-data.js"></script>
+    <script src="js/reviews-data.js"></script>
+    <script src="js/admin-mode.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/admin-analytics.js"></script>
+    <script src="js/admin-reviews.js"></script>
+    <script src="js/admin-online.js"></script>
+  </body>
+</html>
